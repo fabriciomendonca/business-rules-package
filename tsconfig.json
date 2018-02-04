@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "lib": [
+      "es6",
+      "es7"
+    ],
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "declaration": true,
+    "outDir": "./dist",
+    "target": "es5",
+    "moduleResolution": "node",
+    "strict": true
+  },
+  "exclude": [
+    "./node_modules/",
+    "./dist/",
+    "./**/__mocks__/*.ts",
+    "./**/*.spec.ts"
+  ]
+}

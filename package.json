@@ -1,0 +1,77 @@
+{
+  "name": "business-rules-package",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "dependencies": {
+    "axios": "^0.17.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^22.1.1",
+    "jest": "^22.1.4",
+    "nodemon": "^1.14.12",
+    "rimraf": "^2.6.2",
+    "ts-jest": "^22.0.3",
+    "ts-lint": "^4.5.1",
+    "tslint": "^5.9.1",
+    "tslint-consistent-codestyle": "^1.11.0",
+    "tslint-eslint-rules": "^4.1.1",
+    "typescript": "^2.7.1",
+    "vrsource-tslint-rules": "^5.8.0"
+  },
+  "scripts": {
+    "build": "rimraf dist && tsc",
+    "dev": "tsc",
+    "start": "nodemon --watch ./src/ -e ts && npm run dev",
+    "pretest": "tslint --project ./tsconfig.json --config ./tslint.json",
+    "test": "npm run clean-coverage && jest --coverage",
+    "test-dev": "jest --watch",
+    "test-dev-coverage": "rimraf coverage && jest --watchAll --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fabriciomendonca/business-rules-package.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fabriciomendonca/business-rules-package/issues"
+  },
+  "homepage": "https://github.com/fabriciomendonca/business-rules-package#readme",
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/showroom/",
+      "/dist/"
+    ],
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json"
+    ],
+    "mapCoverage": true,
+    "coverageThreshold": {
+      "global": {
+        "branches": 60,
+        "functions": 60,
+        "lines": 60,
+        "statements": 60
+      }
+    }
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "dist/*",
+      "node_modules/*",
+      "showroom/*"
+    ]
+  }
+}

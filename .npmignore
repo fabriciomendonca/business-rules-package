@@ -1,0 +1,41 @@
+# OS X
+.DS_Store
+
+# git
+README.md
+.gitlab-ci.yml
+
+# node
+node_modules
+npm-debug.log
+
+# npm
+morty-biz*.tgz
+
+# typescript
+./src/
+tsconfig.json
+tslint.json
+**/*.map
+*.ts
+!*.d.ts
+
+# coverage
+coverage
+coverage_server.js
+
+# showroom
+showroom
+tsconfig.json
+tslint.json
+node_modules
+*.tgz
+.eslintignore
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln

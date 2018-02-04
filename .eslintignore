@@ -1,0 +1,4 @@
+build/*.js
+config/*.js
+showroom/build/*
+showroom/config/*
