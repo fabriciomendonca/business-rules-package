@@ -3,9 +3,9 @@ export interface IPost {
   id: number;
   title: string;
   body: string;
-  isValidTitle: (additionalValidator?: (value: string) => boolean) => boolean;
-  isValidBody: (additionalValidator?: (value: string) => boolean) => boolean;
-  isValid: () => boolean;
+  isValidTitle?: (additionalValidator?: (value: string) => boolean) => boolean;
+  isValidBody?: (additionalValidator?: (value: string) => boolean) => boolean;
+  isValid?: () => boolean;
 }
 
 export class Post implements IPost {
