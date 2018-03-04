@@ -11,7 +11,8 @@
     "outDir": "./dist",
     "target": "es5",
     "moduleResolution": "node",
-    "strict": true
+    "strict": true,
+    "strictPropertyInitialization": false
   },
   "exclude": [
     "./node_modules/",
