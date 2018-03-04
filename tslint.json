@@ -11,6 +11,7 @@
   ],
   "rules": {
     "no-consecutive-blank-lines": false,
+    "ordered-imports": false,
     "quotemark": [
       true,
       "single",
