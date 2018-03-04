@@ -12,6 +12,8 @@
   "rules": {
     "no-consecutive-blank-lines": false,
     "ordered-imports": false,
+    "member-ordering": false,
+    "object-literal-sort-keys": false,
     "quotemark": [
       true,
       "single",
