@@ -42,7 +42,7 @@ export class Post implements IPost {
    * @returns boolean
    */
   public isValidBody(validator?: (value: string) => boolean): boolean {
-    this._validBody = this._validateBody() && (!validator ? true : validator(this.body));;
+    this._validBody = this._validateBody() && (!validator ? true : validator(this.body));
     return this._validBody;
   }
 
