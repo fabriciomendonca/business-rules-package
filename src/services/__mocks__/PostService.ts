@@ -21,19 +21,20 @@ export class PostService {
 
   public async createPost(data: IPost): Promise<IPost> {
     return {
+      ...data,
       id: 3,
       userId: 1,
-      title: 'Lorem ipsum new',
-      body: 'Dolor sit amet',
     };
   }
 
   public async savePost(data: IPost): Promise<IPost> {
+    if (data.id !== 3) {
+      throw new Error();
+    }
     return {
+      ...data,
       id: 3,
       userId: 1,
-      title: 'Lorem ipsum edited',
-      body: 'Dolor sit amet edited',
     };
   }
 }
