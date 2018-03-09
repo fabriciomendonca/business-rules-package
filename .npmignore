@@ -9,9 +9,6 @@ README.md
 node_modules
 npm-debug.log
 
-# npm
-morty-biz*.tgz
-
 # typescript
 ./src/
 tsconfig.json
@@ -25,12 +22,7 @@ coverage
 coverage_server.js
 
 # showroom
-showroom
-tsconfig.json
-tslint.json
-node_modules
-*.tgz
-.eslintignore
+./showroom/
 
 # Editor directories and files
 .idea

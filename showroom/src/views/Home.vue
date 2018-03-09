@@ -7,6 +7,7 @@
 </template>
 
 <script>
+// eslint-disable-next-line
 import { postExposer } from 'business-rules-package';
 
 export default {
