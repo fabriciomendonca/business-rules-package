@@ -4,6 +4,7 @@ import { IPost } from '../entities/Post';
 export interface IPostExposer {
   initPost: () => IPost;
   posts: Promise<IPost[]>;
+  createPost: (data: IPost) => Promise<IPost>;
 }
 
 class PostExposer implements IPostExposer {
@@ -15,6 +16,10 @@ class PostExposer implements IPostExposer {
 
   public get posts(): Promise<IPost[]> {
     return this._interactor.getPosts();
+  }
+
+  public createPost(data: IPost): Promise<IPost> {
+    return this._interactor.createPost(data);
   }
 }
 
