@@ -1,4 +1,4 @@
-import { IPost } from '../entities/Post';
+import { IPost, Post } from '../entities/Post';
 import PostInteractor, { IPostInteractor } from './PostInteractor';
 import { PostService } from '../services/PostService';
 
@@ -63,12 +63,9 @@ describe('PostInteractor', () => {
   });
 
   it('should create a new post', async () => {
-    const data: IPost = {
-      userId: 0,
-      id: 0,
-      title: 'Lorem ipsum dolor',
-      body: 'Dolor sit amet',
-    };
+    const data: IPost = new Post();
+    data.title = 'Lorem ipsum dolor';
+    data.body = 'Dolor sit amet';
 
     const post = await interactor.createPost(data);
 
@@ -78,17 +75,42 @@ describe('PostInteractor', () => {
     expect(post.title).toEqual(data.title);
   });
 
-  it('should throw an error when creating a post', async () => {
+  it('should throw there is no post data', async () => {
+    let post;
+    let error;
+    try {
+      post = await interactor.createPost(undefined);
+    } catch (err) {
+      error = err;
+    }
+
+    expect(error.message).toBe('No post data provided');
+  });
+
+  it('should throw post data is invalid when creating post', async () => {
+    const data: IPost = new Post();
+    data.body = 'Dolor sit amet';
+
+    let post;
+    let error;
+    try {
+      post = await interactor.createPost(data);
+    } catch (err) {
+      error = err;
+    }
+
+    expect(error.message).toBe('The post data is invalid');
+  });
+
+  it('should throw a service error when creating a post', async () => {
     PostService.prototype.createPost = jest.fn().mockImplementationOnce(() => {
       throw new Error();
     });
     let error;
-    const data: IPost = {
-      userId: 0,
-      id: 0,
-      title: 'Lorem ipsum dolor',
-      body: 'Dolor sit amet',
-    };
+    const data: IPost = new Post();
+    data.title = 'Lorem ipsum dolor';
+    data.body = 'Dolor sit amet';
+
     try {
       await interactor.createPost(data);
     } catch (err) {
@@ -96,16 +118,15 @@ describe('PostInteractor', () => {
     }
 
     expect(error).toBeDefined();
-    expect(error.message).toBe('Error creating post');
+    expect(error.message).toBe('Server error when trying to create the post');
   });
 
   it('should save a new post', async () => {
-    const data: IPost = {
-      userId: 1,
-      id: 3,
-      title: 'Lorem ipsum dolor edited',
-      body: 'Dolor sit amet edited',
-    };
+    const data: IPost = new Post();
+    data.userId = 1;
+    data.id = 3;
+    data.title = 'Lorem ipsum dolor edited';
+    data.body = 'Dolor sit amet';
 
     const post = await interactor.savePost(data);
 
@@ -115,13 +136,12 @@ describe('PostInteractor', () => {
     expect(post.title).toEqual(data.title);
   });
 
-  it('should throw an error when saving a post', async () => {
-    const data: IPost = {
-      userId: 1,
-      id: 2,
-      title: 'Lorem ipsum dolor edited',
-      body: 'Dolor sit amet edited',
-    };
+  it('should throw a service error when saving a post', async () => {
+    const data: IPost = new Post();
+    data.userId = 1;
+    data.id = 2;
+    data.title = 'Lorem ipsum dolor edited';
+    data.body = 'Dolor sit amet';
 
     let error;
     try {
@@ -131,6 +151,6 @@ describe('PostInteractor', () => {
     }
 
     expect(error).toBeDefined();
-    expect(error.message).toBe('Error saving post');
+    expect(error.message).toBe('Server error when trying to save the post');
   });
 });
