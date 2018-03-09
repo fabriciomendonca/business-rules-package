@@ -1,10 +1,16 @@
 <template>
-  <div class="home">
-    <section>
+  <section class="home">
+    <div>
       <h2>Posts exposer</h2>
+      <div class="code">
+<pre>
+import { postExposer } from 'business-rules-package';
+</pre>
+      </div>
       <h3>postExposer.posts</h3>
       <p>Get all posts from jsonplaceholder.</p>
-      <pre>
+      <div class="code">
+<pre>
 data() {
   return {
     posts: [],
@@ -14,15 +20,25 @@ data() {
 async created() {
   this.posts = await postExposer.posts;
 },
-      </pre>
+</pre>
+      </div>
       <small>Just the last 6 posts are shown bellow.</small>
       <ul v-if="postsSliced.length">
-        <li v-for="post in postsSliced" :key="`post-${post.id}`">
-          <router-link :to="`/posts/${post.id}`">{{post.title}}</router-link>
-        </li>
+        <li v-for="post in postsSliced" :key="`post-${post.id}`">{{post.title}}</li>
       </ul>
-    </section>
-  </div>
+      <h3>postsExposer.initPost</h3>
+      <p>Returns a new Post object</p>
+      <div class="code">
+<pre>
+data() {
+  return {
+    post: postsExposer.initPost(),
+  },
+},
+</pre>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -33,6 +49,7 @@ export default {
   data() {
     return {
       posts: [],
+      post: postExposer.initPost(),
     };
   },
 
@@ -50,12 +67,13 @@ export default {
 
 <style lang="css" scoped>
 ul {
-  list-style: none;
+  margin: 20px 0;
+  padding: 0 40px;
 }
-pre {
+.code {
   background: #ebebeb;
-  margin: 0 auto;
-  max-width: 600px;
+  margin: 20px 0;
+  overflow: auto;
   padding: 10px;
   text-align: left;
 }
