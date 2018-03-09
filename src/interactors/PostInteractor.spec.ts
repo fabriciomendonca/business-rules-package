@@ -14,6 +14,16 @@ describe('PostInteractor', () => {
     PostService.prototype.createPost = createPost;
   });
 
+  it('should return a new post object', () => {
+    const post = interactor.initPost();
+
+    expect(post.title).toBe('');
+    expect(post.isValidTitle()).toBeFalsy();
+
+    post.title = 'Valid title';
+    expect(post.isValidTitle()).toBeTruthy();
+  });
+
   it('should get a list of posts', async () => {
     PostService.prototype.getPosts = jest.fn().mockImplementationOnce(() => {
       return getPosts();
