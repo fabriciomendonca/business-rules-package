@@ -3,6 +3,7 @@ export interface IPost {
   id: number;
   title: string;
   body: string;
+  copyData: (data: any) => void;
   isValidTitle: (additionalValidator?: (value: string) => boolean) => boolean;
   isValidBody: (additionalValidator?: (value: string) => boolean) => boolean;
   isValid: () => boolean;
@@ -73,6 +74,25 @@ export class Post implements IPost {
     }
 
     return false;
+  }
+
+  /**
+   * Copy propriesties from an object to
+   * instance properties
+   * @param data object
+   */
+  public copyData(data: any): void {
+    const {
+      id,
+      userId,
+      title,
+      body,
+    } = data;
+
+    this.id = id;
+    this.userId = userId;
+    this.title = title;
+    this.body = body;
   }
 
   /**

@@ -9,6 +9,21 @@ describe('Test Post entity', () => {
     post = new Post();
   });
 
+  it('should copy an object data into a Post instance', () => {
+    const data = {
+      id: 1,
+      userId: 3,
+      title: 'Copy',
+      body: 'Copied',
+    };
+    post.copyData(data);
+
+    expect(post.id).toBe(1);
+    expect(post.userId).toBe(3);
+    expect(post.title).toBe('Copy');
+    expect(post.body).toBe('Copied');
+  });
+
   it('should return title is invalid', () => {
     expect(post.isValidTitle()).toBeFalsy();
   });
