@@ -40,50 +40,85 @@ data() {
       <h3>postsExposer.createPost</h3>
       <p>Validates the data and creates a new post</p>
       <h4>Validate on submit</h4>
-      <div class="tile bg-error fg-white" v-if="errorCreate">{{errorCreate}}</div>
-      <div
-        class="tile bg-success fg-white"
-        v-if="successCreate"
-      >
-        Post "{{createdPost.title}}" was created!
+      <div class="code">
+<pre>
+async createPost() {
+  try {
+    this.post = await postExposer.createPost(this.post);
+    this.error = {};
+    this.errorMessages = {};
+    this.success = true;
+  } catch (err) {
+    this.success = false;
+    this.error = {
+      ...this.error,
+      create: true,
+    };
+    this.errorMessages.message = err.message;
+  }
+},
+</pre>
       </div>
-      <form @submit.prevent="createPost" class="form">
-        <label for="title" class="form__label">Title</label>
-        <input id="title" class="form__field" v-model="post.title">
-        <label for="body" class="form__label">Content</label>
-        <textarea id="body" class="form__field" v-model="post.body"></textarea>
-        <button class="form__submit tile btn bg-blue fg-white" type="submit">Create post</button>
-      </form>
+        <post-form
+          id="on-submit"
+          :live-validation="false"
+          :use-vee-validate="false"
+      ></post-form>
       <h4>Live validation</h4>
-      <div class="tile bg-error fg-white" v-if="errorTitleLive || errorBodyLive">
-        <p v-if="errorTitleLive">{{errorTitleLive}}</p>
-        <p v-if="errorBodyLive">{{errorBodyLive}}</p>
+      <div class="code">
+<pre>
+validateTitle() {
+  const additionalValidation = title => title.length > 10;
+
+  if (!this.post.isValidTitle(additionalValidation)) {
+    this.error = {
+      ...this.error,
+      title: true,
+    };
+    this.errorMessages.title = 'Title is invalid';
+  } else {
+    this.$delete(this.error, 'title');
+    this.$delete(this.errorMessages, 'title');
+  }
+},
+// the same applies for isValidBody validator
+</pre>
       </div>
-      <div
-        class="tile bg-success fg-white"
-        v-if="successCreateLive"
-      >
-        Post "{{createdPostLive.title}}" was created!
+      <post-form
+          id="live-validate"
+          :live-validation="true"
+          :use-vee-validate="false"
+      ></post-form>
+      <h4>Using VeeValidate</h4>
+      <div class="code">
+<pre>
+// VeeValidate validators return promises.
+// To use them as additional validation,
+// it is necessary to resolve the promise before
+// and return the resolved valid in a function
+// that should be passed to post object validation methods
+async validateBody() {
+  const valid = await this.validator.validate('body', this.post.body);
+  const additionalValidation = () => valid;
+
+  if (!this.post.isValidBody(additionalValidation)) {
+    this.error = {
+      ...this.error,
+      body: true,
+    };
+    this.errorMessages.body = 'Content is invalid';
+  } else {
+    this.$delete(this.error, 'body');
+    this.$delete(this.errorMessages, 'body');
+  }
+},
+</pre>
       </div>
-      <form @submit.prevent="createPostLive" class="form">
-        <label for="title1" class="form__label">Title</label>
-        <input
-          id="title1"
-          :class="['form__field', {'border-error': errorTitleLive}]"
-          v-model="postLive.title"
-          @input="validateTitleLive"
-        >
-        <label for="body1" class="form__label">Content</label>
-        <textarea
-          id="body1"
-          :class="['form__field', {'border-error': errorBodyLive}]"
-          v-model="postLive.body" @input="validateBodyLive"></textarea>
-        <button
-          class="form__submit tile btn bg-blue fg-white"
-          type="submit"
-          :disabled="!validForm">Create post</button>
-      </form>
-      <h4>Using vuelidate</h4>
+      <post-form
+          id="use-vee-validate"
+          :live-validation="true"
+          :use-vee-validate="true"
+      ></post-form>
     </div>
   </section>
 </template>
@@ -91,21 +126,15 @@ data() {
 <script>
 // eslint-disable-next-line
 import { postExposer } from 'business-rules-package';
+import PostForm from '../components/PostForm';
 
 export default {
+  components: {
+    PostForm,
+  },
   data() {
     return {
-      errorCreate: undefined,
-      successCreate: false,
-      createdPost: undefined,
-      errorTitleLive: undefined,
-      errorBodyLive: undefined,
-      successCreateLive: false,
-      createdPostLive: undefined,
       posts: [],
-      post: postExposer.initPost(),
-      postLive: postExposer.initPost(),
-      validForm: false,
     };
   },
 
@@ -116,47 +145,15 @@ export default {
   },
 
   methods: {
-    validateTitleLive() {
-      if (!this.postLive.isValidTitle(title => title.length > 10)) {
-        this.errorTitleLive = 'Title is invalid';
-      } else {
-        this.errorTitleLive = undefined;
-      }
-
-      this.validForm = this.postLive.isValid();
-    },
-
-    validateBodyLive() {
-      if (!this.postLive.isValidBody()) {
-        this.errorBodyLive = 'Content is invalid';
-      } else {
-        this.errorBodyLive = undefined;
-      }
-
-      this.validForm = this.postLive.isValid();
-    },
-
-    async createPost() {
+    async createPostVeeValidate() {
       try {
-        this.createdPost = await postExposer.createPost(this.post);
-        this.errorCreate = undefined;
-        this.successCreate = true;
-        this.post = postExposer.initPost();
+        this.createdPostVeeValidate = await postExposer.createPost(this.postVeeValidate);
+        this.postVeeValidate = postExposer.initPost();
+        this.successCreateVeeValidate = true;
+        this.$validator.clean();
       } catch (err) {
-        this.errorCreate = err.message;
-        this.successCreate = false;
-      }
-    },
-
-    async createPostLive() {
-      try {
-        this.createdPostLive = await postExposer.createPost(this.postLive);
-        this.errorCreateLive = undefined;
-        this.successCreateLive = true;
-        this.postLive = postExposer.initPost();
-      } catch (err) {
-        this.errorCreateLive = err.message;
-        this.successCreateLive = false;
+        this.errorCreateVeeValidate = err.message;
+        this.successCreateVeeValidate = false;
       }
     },
   },
@@ -178,26 +175,6 @@ ul {
   overflow: auto;
   padding: 10px;
   text-align: left;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  max-width: 600px;
-}
-
-.form__label {
-  margin: 10px 0;
-}
-
-.form__field {
-  margin-bottom: 20px;
-  padding: 5px;
-}
-
-.form__submit {
-  align-self: flex-end;
-  flex-grow: 0;
 }
 </style>
 
