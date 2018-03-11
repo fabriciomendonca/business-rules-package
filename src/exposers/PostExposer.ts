@@ -5,6 +5,7 @@ export interface IPostExposer {
   initPost: () => IPost;
   posts: Promise<IPost[]>;
   createPost: (data: IPost) => Promise<IPost>;
+  savePost: (data: IPost) => Promise<IPost>;
 }
 
 class PostExposer implements IPostExposer {
@@ -20,6 +21,10 @@ class PostExposer implements IPostExposer {
 
   public createPost(data: IPost): Promise<IPost> {
     return this._interactor.createPost(data);
+  }
+
+  public savePost(data: IPost): Promise<IPost> {
+    return this._interactor.savePost(data);
   }
 }
 

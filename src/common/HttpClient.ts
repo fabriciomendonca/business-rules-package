@@ -29,7 +29,7 @@ class HttpClient implements IHttpClient {
   }
 
   public async patch<T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
-    const response: AxiosResponse = await this._http.post(url, data, config);
+    const response: AxiosResponse = await this._http.patch(url, data, config);
     return response.data;
   }
 }
