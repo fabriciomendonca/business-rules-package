@@ -119,6 +119,36 @@ async validateBody() {
           :live-validation="true"
           :use-vee-validate="true"
       ></post-form>
+      <h3>postsExposer.savePost</h3>
+      <p>Validates the data and saves a post</p>
+      <div class="code">
+<pre>
+// if you want to use a plain object
+// to send data to the Post business object
+// instance, use the copyData method
+if (this.postData) {
+  this.post.copyData(this.postData);
+}
+</pre>
+      </div>
+      <div class="code">
+<pre>
+async savePost() {
+  try {
+    this.post = await postExposer.savePost(this.post);
+  } catch (err) {
+    this.setError(err);
+  }
+},
+</pre>
+      </div>
+      <post-form
+          id="use-vee-validate"
+          v-if="posts.length"
+          :post-data="posts[1]"
+          :live-validation="true"
+          :use-vee-validate="true"
+      ></post-form>
     </div>
   </section>
 </template>

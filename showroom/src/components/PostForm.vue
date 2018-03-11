@@ -9,7 +9,7 @@
       class="tile bg-success fg-white"
       v-if="success"
     >
-      Post "{{post.title}}" was created!
+      Post "{{post.title}}" was saved!
     </div>
     <form @submit.prevent="submit" class="form" :data-vv-scope="id">
       <label :for="`${id}-title`" class="form__label">Title</label>
@@ -38,7 +38,7 @@ import { Validator } from 'vee-validate';
 
 export default {
   name: 'post-form',
-  props: ['id', 'liveValidation', 'useVeeValidate'],
+  props: ['id', 'postData', 'liveValidation', 'useVeeValidate'],
   data() {
     return {
       post: postExposer.initPost(),
@@ -123,21 +123,33 @@ export default {
     async createPost() {
       try {
         this.post = await postExposer.createPost(this.post);
-        this.error = {};
-        this.errorMessages = {};
-        this.success = true;
+        this.setSuccess();
       } catch (err) {
-        this.success = false;
-        this.error = {
-          ...this.error,
-          create: true,
-        };
-        this.errorMessages.message = err.message;
+        this.setError(err);
       }
     },
 
     async savePost() {
-      return false;
+      try {
+        this.post = await postExposer.savePost(this.post);
+      } catch (err) {
+        this.setError(err);
+      }
+    },
+
+    setError(err) {
+      this.success = false;
+      this.error = {
+        ...this.error,
+        create: true,
+      };
+      this.errorMessages.message = err.message;
+    },
+
+    setSuccess() {
+      this.error = {};
+      this.errorMessages = {};
+      this.success = true;
     },
   },
 
@@ -147,6 +159,10 @@ export default {
         title: 'required|min:10',
         body: 'required|min:20',
       });
+    }
+
+    if (this.postData) {
+      this.post.copyData(this.postData);
     }
   },
 };
