@@ -24,7 +24,7 @@
     "build": "rimraf dist && tsc",
     "clean-coverage": "rimraf coverage",
     "dev": "tsc",
-    "start": "nodemon --watch ./src/ -e ts && npm run dev",
+    "start": "nodemon --watch ./src/ -e ts --exec \"npm run dev\"",
     "pretest": "tslint --project ./tsconfig.json --config ./tslint.json",
     "test": "npm run clean-coverage && jest --coverage",
     "test-dev": "jest --watch",
