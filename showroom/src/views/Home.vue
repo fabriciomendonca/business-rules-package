@@ -92,6 +92,28 @@ validateTitle() {
       <h4>Using VeeValidate</h4>
       <div class="code">
 <pre>
+&lt;post-form
+  id="use-vee-validate"
+  :live-validation="true"
+  :use-vee-validate="true"
+&gt;&lt;/post-form&gt;
+</pre>
+      </div>
+      <div class="code">
+<pre>
+// PostForm.vue component
+created() {
+  if (this.useVeeValidate) {
+    this.validator = Validator.create({
+      title: 'required|min:10',
+      body: 'required|min:20',
+    });
+  }
+},
+</pre>
+      </div>
+      <div class="code">
+<pre>
 // VeeValidate validators return promises.
 // To use them as additional validation,
 // it is necessary to resolve the promise before
