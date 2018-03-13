@@ -174,20 +174,6 @@ export default {
     },
   },
 
-  methods: {
-    async createPostVeeValidate() {
-      try {
-        this.createdPostVeeValidate = await postExposer.createPost(this.postVeeValidate);
-        this.postVeeValidate = postExposer.initPost();
-        this.successCreateVeeValidate = true;
-        this.$validator.clean();
-      } catch (err) {
-        this.errorCreateVeeValidate = err.message;
-        this.successCreateVeeValidate = false;
-      }
-    },
-  },
-
   async created() {
     this.posts = await postExposer.posts;
   },
