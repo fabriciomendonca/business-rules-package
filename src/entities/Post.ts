@@ -47,6 +47,13 @@ export class Post implements IPost {
     return this._validBody;
   }
 
+  /**
+   * Returns if the post object is valid
+   * It should not use internal (private) validation methods
+   * if previous property validation methods were used
+   * @memberof Post
+   * @returns boolean
+   */
   public isValid(): boolean {
     if (
       (
@@ -79,6 +86,7 @@ export class Post implements IPost {
   /**
    * Copy propriesties from an object to
    * instance properties
+   * @memberof Post
    * @param data object
    */
   public copyData(data: any): void {
