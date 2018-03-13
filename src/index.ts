@@ -1,2 +1,2 @@
-export * from './entities/Post';
+export { IPost } from './entities/Post';
 export * from './exposers/PostExposer';
