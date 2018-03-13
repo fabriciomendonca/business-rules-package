@@ -3,10 +3,10 @@ export interface IPost {
   id: number;
   title: string;
   body: string;
-  copyData: (data: any) => void;
-  isValidTitle: (additionalValidator?: (value: string) => boolean) => boolean;
-  isValidBody: (additionalValidator?: (value: string) => boolean) => boolean;
-  isValid: () => boolean;
+  copyData?: (data: any) => void;
+  isValidTitle?: (additionalValidator?: (value: string) => boolean) => boolean;
+  isValidBody?: (additionalValidator?: (value: string) => boolean) => boolean;
+  isValid?: () => boolean;
 }
 
 export class Post implements IPost {
