@@ -107,7 +107,7 @@ export class Post implements IPost {
 
   /**
    * Validates body property
-   * It should be not empty and should not have less than 10 characters
+   * It should not be empty and should not have less than 10 characters
    * @memberof Post
    * @returns boolean
    */

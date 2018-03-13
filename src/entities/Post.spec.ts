@@ -24,7 +24,7 @@ describe('Test Post entity', () => {
     expect(post.body).toBe('Copied');
   });
 
-  it('should return title is invalid', () => {
+  it('should return title is invalid for empty string', () => {
     expect(post.isValidTitle()).toBeFalsy();
   });
 
@@ -40,7 +40,7 @@ describe('Test Post entity', () => {
     expect(post.isValidTitle()).toBeFalsy();
   });
 
-  it('should returns title is valid', () => {
+  it('should return title is valid', () => {
     post.title = 'New post';
     expect(post.isValidTitle()).toBeTruthy();
   });
@@ -52,7 +52,8 @@ describe('Test Post entity', () => {
     })).toBeTruthy();
   });
 
-  it('should return body is invalid', () => {
+  it('should return body is invalid for strings with less than 10 characters', () => {
+    post.body = 'Lorem ip'
     expect(post.isValidBody()).toBeFalsy();
   });
 
@@ -92,6 +93,17 @@ describe('Test Post entity', () => {
 
     expect(post.isValidTitle((title: string): boolean => {
       return title.indexOf('dolor') < 0;
+    })).toBeFalsy();
+
+    expect(post.isValid()).toBeFalsy();
+  });
+
+  it('should return post is invalid with previous body validation', () => {
+    post.title = 'Lorem ipsum dolor';
+    post.body = 'Invalid body';
+
+    expect(post.isValidBody((body: string): boolean => {
+      return body.length > 20;
     })).toBeFalsy();
 
     expect(post.isValid()).toBeFalsy();
