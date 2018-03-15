@@ -36,6 +36,9 @@ npm install
 
 # Link the package
 npm link ../
+
+# Run start script for development
+npm start
 ```
 
 ## Running simple usage example
