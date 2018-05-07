@@ -1,6 +1,6 @@
 # business-rules-package
 
-This package is part of the article [Front End Architecture — Making rebuild from scratch not so painful]().
+This package is part of the article [Front End Architecture — Making rebuild from scratch not so painful](https://medium.com/car2godevs/front-end-architecture-making-rebuild-from-scratch-not-so-painful-7b2232dc1666).
 
 It implements the use cases to load, create and save posts consuming [jsonplaceholder API](https://jsonplaceholder.typicode.com/).
 
