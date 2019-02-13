@@ -1,24 +1,26 @@
 {
   "name": "business-rules-package",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "dependencies": {
-    "axios": "^0.17.1"
+    "axios": "^0.18.0"
   },
   "devDependencies": {
-    "@types/jest": "^22.1.1",
-    "jest": "^22.1.4",
-    "nodemon": "^1.14.12",
-    "rimraf": "^2.6.2",
-    "ts-jest": "^22.0.3",
+    "@types/jest": "^24.0.3",
+    "@types/jest-diff": "^20.0.0",
+    "jest": "^23.6.0",
+    "nodemon": "^1.18.10",
+    "rimraf": "^2.6.3",
+    "ts-jest": "^23.10.5",
     "ts-lint": "^4.5.1",
-    "tslint": "^5.9.1",
-    "tslint-consistent-codestyle": "^1.11.0",
-    "tslint-eslint-rules": "^4.1.1",
-    "typescript": "^2.7.1",
-    "vrsource-tslint-rules": "^5.8.0"
+    "tslint": "^5.12.1",
+    "tslint-consistent-codestyle": "^1.15.0",
+    "tslint-eslint-rules": "^5.4.0",
+    "tsutils": "^2.29.0",
+    "typescript": "^3.2.4",
+    "vrsource-tslint-rules": "^6.0.0"
   },
   "scripts": {
     "build": "rimraf dist && tsc",
@@ -58,7 +60,6 @@
       "jsx",
       "json"
     ],
-    "mapCoverage": true,
     "coverageThreshold": {
       "global": {
         "branches": 60,

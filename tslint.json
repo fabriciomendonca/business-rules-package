@@ -5,43 +5,23 @@
     "node_modules/vrsource-tslint-rules/rules"
   ],
   "extends": "tslint:recommended",
-  "exclude": [
-    "**/showroom/**/*",
-    "node_modules"
-  ],
+  "exclude": ["**/showroom/**/*", "node_modules"],
   "rules": {
     "no-consecutive-blank-lines": false,
     "ordered-imports": false,
     "member-ordering": false,
     "object-literal-sort-keys": false,
-    "quotemark": [
-      true,
-      "single",
-      "avoid-escape",
-      "avoid-template"
-    ],
-    "indent": [
-      true,
-      "spaces",
-      2
-    ],
+    "quotemark": [true, "single", "avoid-escape", "avoid-template"],
+    "indent": [true, "spaces", 2],
     "no-collapsible-if": true,
     "no-else-after-return": true,
     "no-return-undefined": true,
     "no-unused": true,
     "no-shadowed-variable": true,
-    "max-params": [
-      true,
-      3
-    ],
+    "max-params": [true, 3],
     "no-duplicate-imports": true,
     "no-parameter-reassignment": true,
-    "prefer-literal": [
-      true,
-      "object",
-      "function",
-      "array"
-    ],
+    "prefer-literal": [true, "object", "function", "array"],
     "variable-name": [
       true,
       "ban-keywords",
@@ -52,31 +32,19 @@
     "literal-spacing": [
       true,
       {
-        "array": [
-          "never"
-        ],
-        "object": [
-          "never"
-        ],
-        "import": [
-          "always"
-        ]
+        "array": ["never"],
+        "object": ["always"],
+        "import": ["always"]
       }
     ],
     "ext-variable-name": [
       true,
-      [
-        "property",
-        "private",
-        "camel",
-        "require-leading-underscore"
-      ]
+      ["property", "private", "camel", "require-leading-underscore"]
     ],
-    "interface-name": false
+    "interface-name": false,
+    "trailing-comma": false
   },
   "linterOptions": {
-    "exclude": [
-      "./showroom"
-    ]
+    "exclude": ["./showroom"]
   }
 }
