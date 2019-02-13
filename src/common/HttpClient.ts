@@ -3,7 +3,11 @@ import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 export interface IHttpClient {
   get: <T>(url: string, config?: AxiosRequestConfig) => Promise<T>;
   post: <T>(url: string, data?: any, config?: AxiosRequestConfig) => Promise<T>;
-  patch: <T>(url: string, data?: any, config?: AxiosRequestConfig) => Promise<T>;
+  patch: <T>(
+    url: string,
+    data?: any,
+    config?: AxiosRequestConfig
+  ) => Promise<T>;
 }
 
 class HttpClient implements IHttpClient {
@@ -13,8 +17,8 @@ class HttpClient implements IHttpClient {
     this._http = axios.create({
       baseURL: 'https://jsonplaceholder.typicode.com',
       headers: {
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     });
   }
 
@@ -23,12 +27,20 @@ class HttpClient implements IHttpClient {
     return response.data;
   }
 
-  public async post<T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
+  public async post<T>(
+    url: string,
+    data?: any,
+    config?: AxiosRequestConfig
+  ): Promise<T> {
     const response: AxiosResponse = await this._http.post(url, data, config);
     return response.data;
   }
 
-  public async patch<T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
+  public async patch<T>(
+    url: string,
+    data?: any,
+    config?: AxiosRequestConfig
+  ): Promise<T> {
     const response: AxiosResponse = await this._http.patch(url, data, config);
     return response.data;
   }

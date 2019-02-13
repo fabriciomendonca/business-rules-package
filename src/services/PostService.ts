@@ -14,22 +14,18 @@ export class PostService implements IPostService {
   }
 
   public async createPost(data: IPost): Promise<IPost> {
-    const {
-      title,
-      body,
-    } = data;
-    const response = await httpClient.post<IPost>('/posts', {title, body});
+    const { title, body } = data;
+    const response = await httpClient.post<IPost>('/posts', { title, body });
 
     return response;
   }
 
   public async savePost(data: IPost): Promise<IPost> {
-    const {
-      id,
+    const { id, title, body } = data;
+    const response = await httpClient.patch<IPost>(`/posts/${id}`, {
       title,
-      body,
-    } = data;
-    const response = await httpClient.patch<IPost>(`/posts/${id}`, {title, body});
+      body
+    });
 
     return response;
   }

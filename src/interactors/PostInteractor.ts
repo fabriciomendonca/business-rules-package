@@ -9,7 +9,9 @@ export interface IPostInteractor {
 }
 
 export default class PostInteractor implements IPostInteractor {
-  private static _instance: IPostInteractor = new PostInteractor(new PostService());
+  private static _instance: IPostInteractor = new PostInteractor(
+    new PostService()
+  );
 
   public static getInstance(): IPostInteractor {
     return this._instance;

@@ -8,14 +8,14 @@ export class PostService {
         userId: 1,
         id: 1,
         title: 'Lorem ipsum',
-        body: 'Dolor sit amet',
+        body: 'Dolor sit amet'
       },
       {
         userId: 1,
         id: 2,
         title: 'Lorem ipsum dolor',
-        body: 'Dolor sit amet',
-      },
+        body: 'Dolor sit amet'
+      }
     ];
   }
 
@@ -23,7 +23,7 @@ export class PostService {
     return {
       ...data,
       id: 3,
-      userId: 1,
+      userId: 1
     };
   }
 
@@ -34,7 +34,7 @@ export class PostService {
     return {
       ...data,
       id: 3,
-      userId: 1,
+      userId: 1
     };
   }
 }

@@ -15,7 +15,7 @@ describe('PostInteractor', () => {
   });
 
   it('should return a new post object', () => {
-    const post = interactor.initPost();
+    const post = interactor.initPost() as Post;
 
     expect(post.title).toBe('');
     expect(post.isValidTitle()).toBeFalsy();
@@ -86,6 +86,7 @@ describe('PostInteractor', () => {
   });
 
   it('should throw there is no post data', async () => {
+    // tslint:disable-next-line: no-unused
     let post;
     let error;
     try {
@@ -101,6 +102,7 @@ describe('PostInteractor', () => {
     const data: IPost = new Post();
     data.body = 'Dolor sit amet';
 
+    // tslint:disable-next-line: no-unused
     let post;
     let error;
     try {
